@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Alarm for 6 AM - Online Alarm Clock</title>
+    <meta name="description" content="Set your alarm for 6 AM with our free online alarm clock. Easy to use, no downloads required.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3b82f6",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-clock text-2xl text-primary"></i>
+                    <h1 class="text-xl font-bold text-gray-800">SetAlarmClock.net</h1>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-primary transition-colors">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-primary transition-colors">Alarm Clock</a>
+                    <a href="#" class="text-gray-600 hover:text-primary transition-colors">Timer</a>
+                    <a href="#" class="text-gray-600 hover:text-primary transition-colors">Stopwatch</a>
+                </nav>
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Set Alarm for 6 AM</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Set your alarm clock for 6:00 AM with our free online tool. No downloads, no registration required.</p>
+        </div>
+
+        <!-- Alarm Interface -->
+        <div class="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <!-- Current Time Display -->
+            <div class="text-center mb-8">
+                <div class="text-sm text-gray-500 mb-2">Current Time</div>
+                <div id="currentTime" class="text-3xl font-bold text-gray-800">00:00:00</div>
+                <div id="currentDate" class="text-gray-500 mt-2">Loading...</div>
+            </div>
+
+            <!-- Alarm Settings -->
+            <div class="space-y-6">
+                <!-- Time Selection -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Set Alarm Time</label>
+                    <div class="flex items-center justify-center space-x-4">
+                        <select id="hourSelect" class="w-20 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6" selected>6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                        <span class="text-xl text-gray-600">:</span>
+                        <select id="minuteSelect" class="w-20 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="00" selected>00</option>
+                            <option value="05">05</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                            <option value="35">35</option>
+                            <option value="40">40</option>
+                            <option value="45">45</option>
+                            <option value="50">50</option>
+                            <option value="55">55</option>
+                        </select>
+                        <select id="ampmSelect" class="w-20 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="AM" selected>AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Alarm Sound -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Alarm Sound</label>
+                    <select id="soundSelect" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option value="beep">Beep</option>
+                        <option value="bell">Bell</option>
+                        <option value="digital">Digital</option>
+                        <option value="chimes">Chimes</option>
+                    </select>
+                </div>
+
+                <!-- Snooze Option -->
+                <div>
+                    <label class="flex items-center">
+                        <input type="checkbox" id="snoozeCheckbox" class="rounded border-gray-300 text-primary focus:ring-primary">
+                        <span class="ml-2 text-sm text-gray-700">Enable Snooze (5 minutes)</span>
+                    </label>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-4">
+                    <button id="setAlarmBtn" class="flex-1 bg-primary hover:bg-secondary text-white py-3 px-6 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-bell mr-2"></i>Set Alarm for 6 AM
+                    </button>
+                </div>
+            </div>
+
+            <!-- Active Alarm Display -->
+            <div id="activeAlarm" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="text-green-800 font-medium">Alarm Set</div>
+                    <div id="alarmTimeDisplay" class="text-green-600">6:00 AM</div>
+                    <button id="cancelAlarmBtn" class="text-red-600 hover:text-red-800">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <i class="fas fa-desktop text-3xl text-primary mb-4"></i>
+                <h3 class="font-semibold text-gray-800 mb-2">Easy to Use</h3>
+                <p class="text-gray-600 text-sm">Simple interface to set your alarm in seconds</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <i class="fas fa-volume-up text-3xl text-primary mb-4"></i>
+                <h3 class="font-semibold text-gray-800 mb-2">Multiple Sounds</h3>
+                <p class="text-gray-600 text-sm">Choose from different alarm sounds</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <i class="fas fa-mobile-alt text-3xl text-primary mb-4"></i>
+                <h3 class="font-semibold text-gray-800 mb-2">Mobile Friendly</h3>
+                <p class="text-gray-600 text-sm">Works perfectly on all devices</p>
+            </div>
+        </div>
+
+        <!-- Popular Alarm Times -->
+        <div class="max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Popular Alarm Times</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="#" class="bg-white p-4 rounded-lg shadow-sm text-center hover:shadow-md transition-shadow">
+                    <div class="text-lg font-semibold text-primary">6:00 AM</div>
+                    <div class="text-sm text-gray-600">Morning</div>
+                </a>
+                <a href="#" class="bg-white p-4 rounded-lg shadow-sm text-center hover:shadow-md transition-shadow">
+                    <div class="text-lg font-semibold text-primary">7:00 AM</div>
+                    <div class="text-sm text-gray-600">Wake Up</div>
+                </a>
+                <a href="#" class="bg-white p-4 rounded-lg shadow-sm text-center hover:shadow-md transition-shadow">
+                    <div class="text-lg font-semibold text-primary">8:00 AM</div>
+                    <div class="text-sm text-gray-600">Work Start</div>
+                </a>
+                <a href="#" class="bg-white p-4 rounded-lg shadow-sm text-center hover:shadow-md transition-shadow">
+                    <div class="text-lg font-semibold text-primary">9:00 AM</div>
+                    <div class="text-sm text-gray-600">Meeting</div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">SetAlarmClock.net</h3>
+                    <p class="text-gray-400 text-sm">Free online alarm clock, timer, and stopwatch.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Tools</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Alarm Clock</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Timer</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Stopwatch</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Support</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Help</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Feedback</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-3">Legal</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2024 SetAlarmClock.net. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alarm Sound -->
+    <audio id="alarmSound" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/257/257-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // DOM Elements
+        const currentTimeElement = document.getElementById("currentTime");
+        const currentDateElement = document.getElementById("currentDate");
+        const hourSelect = document.getElementById("hourSelect");
+        const minuteSelect = document.getElementById("minuteSelect");
+        const ampmSelect = document.getElementById("ampmSelect");
+        const soundSelect = document.getElementById("soundSelect");
+        const snoozeCheckbox = document.getElementById("snoozeCheckbox");
+        const setAlarmBtn = document.getElementById("setAlarmBtn");
+        const activeAlarm = document.getElementById("activeAlarm");
+        const alarmTimeDisplay = document.getElementById("alarmTimeDisplay");
+        const cancelAlarmBtn = document.getElementById("cancelAlarmBtn");
+        const alarmSound = document.getElementById("alarmSound");
+
+        // Alarm state
+        let alarmSet = false;
+        let alarmTime = null;
+        let alarmInterval = null;
+
+        // Update current time
+        function updateCurrentTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString("en-US", { 
+                hour12: false,
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit"
+            });
+            const dateString = now.toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            });
+            
+            currentTimeElement.textContent = timeString;
+            currentDateElement.textContent = dateString;
+        }
+
+        // Set alarm function
+        function setAlarm() {
+            if (alarmSet) {
+                alert("An alarm is already set. Please cancel the current alarm first.");
+                return;
+            }
+
+            const hour = parseInt(hourSelect.value);
+            const minute = parseInt(minuteSelect.value);
+            const ampm = ampmSelect.value;
+
+            // Convert to 24-hour format
+            let alarmHour = hour;
+            if (ampm === "PM" && hour !== 12) {
+                alarmHour += 12;
+            } else if (ampm === "AM" && hour === 12) {
+                alarmHour = 0;
+            }
+
+            alarmTime = new Date();
+            alarmTime.setHours(alarmHour, minute, 0, 0);
+
+            // If alarm time is in the past, set for tomorrow
+            if (alarmTime <= new Date()) {
+                alarmTime.setDate(alarmTime.getDate() + 1);
+            }
+
+            alarmSet = true;
+            activeAlarm.classList.remove("hidden");
+            alarmTimeDisplay.textContent = `${hour}:${minute.toString().padStart(2, "0")} ${ampm}`;
+
+            // Start checking for alarm
+            alarmInterval = setInterval(checkAlarm, 1000);
+
+            // Show confirmation
+            alert(`Alarm set for ${hour}:${minute.toString().padStart(2, "0")} ${ampm}`);
+        }
+
+        // Check if alarm should trigger
+        function checkAlarm() {
+            const now = new Date();
+            if (now >= alarmTime) {
+                triggerAlarm();
+            }
+        }
+
+        // Trigger alarm
+        function triggerAlarm() {
+            clearInterval(alarmInterval);
+            alarmSound.play();
+            
+            if (snoozeCheckbox.checked) {
+                const response = confirm("Alarm! Click OK to stop, or Cancel to snooze for 5 minutes.");
+                
+                if (response) {
+                    stopAlarm();
+                } else {
+                    snoozeAlarm();
+                }
+            } else {
+                const response = confirm("Alarm! Click OK to stop.");
+                if (response) {
+                    stopAlarm();
+                }
+            }
+        }
+
+        // Snooze alarm
+        function snoozeAlarm() {
+            alarmTime = new Date(alarmTime.getTime() + 5 * 60 * 1000); // 5 minutes
+            alarmInterval = setInterval(checkAlarm, 1000);
+            alert("Alarm snoozed for 5 minutes");
+        }
+
+        // Stop alarm
+        function stopAlarm() {
+            alarmSound.pause();
+            alarmSound.currentTime = 0;
+            clearInterval(alarmInterval);
+            alarmSet = false;
+            activeAlarm.classList.add("hidden");
+        }
+
+        // Cancel alarm
+        function cancelAlarm() {
+            if (alarmSet) {
+                clearInterval(alarmInterval);
+                alarmSet = false;
+                activeAlarm.classList.add("hidden");
+                alert("Alarm cancelled");
+            }
+        }
+
+        // Event Listeners
+        setAlarmBtn.addEventListener("click", setAlarm);
+        cancelAlarmBtn.addEventListener("click", cancelAlarm);
+
+        // Initialize
+        updateCurrentTime();
+        setInterval(updateCurrentTime, 1000);
+
+        // Prevent default anchor behavior
+        document.querySelectorAll("a").forEach(anchor => {
+            anchor.addEventListener("click", function(e) {
+                e.preventDefault();
+                // In a real implementation, this would navigate to the page
+                console.log("Navigation to:", this.getAttribute("href"));
+            });
+        });
+    </script>
+</body>
+</html>
